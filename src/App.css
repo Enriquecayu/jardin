@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Fuente más amigable */
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    /* Evita el destello azul en móviles al tocar */
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    /* Gradiente más suave y romántico */
+    background: linear-gradient(to bottom, #1e293b, #312e81, #4c1d95);
+    position: relative;
+    /* Mantenemos el cursor de cruz para indicar interacción */
+    cursor: crosshair;
+}
+
+.mensaje-inicial {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    color: #f0f9ff;
+    padding: 0 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    /* Asegura que esté por encima de las flores */
+}
+
+.mensaje-inicial h1 {
+    font-size: 3rem;
+    color: #fbbf24;
+    /* Amarillo vibrante */
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.mensaje-inicial p {
+    font-size: 1.4rem;
+    color: #e0e7ff;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Contenedor de la flor (el SVG vive aquí) */
+.flower {
+    position: absolute;
+    pointer-events: none;
+    /* Animación de aparición más elaborada */
+    animation: the-bloom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+    /* Sombra suave para que las flores resalten del fondo */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Keyframes de la animación de "florecer" */
+@keyframes the-bloom {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.contador {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    color: rgba(251, 191, 36, 0.6);
+    /* Amarillo ámbar semitransparente */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    background-color: rgba(15, 23, 42, 0.5);
+    padding: 5px 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+/* Media query para celulares (ajustar tamaños de texto) */
+@media (max-width: 640px) {
+    .mensaje-inicial h1 {
+        font-size: 2.2rem;
+    }
+
+    .mensaje-inicial p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Barra flotante para elegir el tipo/color de flor */
+.toolbar {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
+    /* Esto hace que si no entran, salten a la siguiente línea */
+    justify-content: center;
+    max-width: 90%;
+}
+
+/* Botones de selección de color */
+.color-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    width: 30px;
+    /* Un poquito más chicos para que entren todos bien */
+    height: 30px;
+}
+
+.color-btn:hover {
+    transform: scale(1.15);
+}
+
+.color-btn.active {
+    border-color: #ffffff;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Ocultar mensaje inicial si ya hay muchas flores o interactuó */
+.instruccion-barra {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.container {
+    cursor: crosshair;
+}
+
+.container:has(.color-btn.active:last-child) {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="white" stroke="black"/></svg>') 10 10, auto;
+}
+.frase-jardin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+  max-width: 700px;
+  padding: 0 20px;
+}
+
+.frase-jardin p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: #fbbf24; /* Amarillo vibrante */
+  opacity: 0.9; /* Bien visible */
+  line-height: 1.5;
+  margin: 0;
+  user-select: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Sombra para que resalte con cualquier fondo */
+}
